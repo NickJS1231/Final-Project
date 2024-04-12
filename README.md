@@ -12,7 +12,8 @@ To visualize this, the project will create a dashboard that graphs the efficient
  - Cheapest equities <br>
  - Firms that create or deliver pizza i.e. Domino’s, Grubhub <br>
  - Tickers that contain the letters “L”, “E”, “H”, “I”, or “G” <br>
- - Etc. <br> <br>
+ - Etc. <br> <br> <br>
+
 **The Analysis will then assess the following:** <br>
  - Which firms are included in the subset vs the benchmark? <br>
  - What is the marginal utility of the subset (assessed through the utility equation) <br>
@@ -37,8 +38,8 @@ To visualize this, the project will create a dashboard that graphs the efficient
 2. Depends on methodology (i.e. OpenBloomberg, yfinance)
 3. Calculate Return and variance of each security over a specified time horizon
 4. Define levels of risk aversion (create arbitrarily calculated, selectable levels of “riskiness rather than using an assessment) (Research best ways to do this)
-5. With risk aversion and user-selected goals, able to calculate capital allocation 
- a. Set aside percentage of capital for risk free assets
+5. With risk aversion and user-selected goals, able to calculate capital allocation <br>
+ a. Set aside percentage of capital for risk free assets<br>
  b. With equity section, continue to next step
 6. Trim dataset depending on user-selected goals (see themes above)
 7. Calculate efficient frontier curves for entire dataset as well as the user-selected goal-oriented dataset-trim
