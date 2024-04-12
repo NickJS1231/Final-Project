@@ -1,6 +1,7 @@
 # Portfolio Utility: A Comparative Analysis <br> <br>
 ### The Research <br> 
-This project aims to assess the utility of a given portfolio theme (i.e., sustainability, low beta, Technology, etc.) when compared to a larger sample benchmark (the S&P 500). At large scale (the big question), research in this area aims to validate the marginal utility of increased diversification by showing compromises in utility in a given subset of the larger sample. More directly, this research aims to show which themes of portfolios have which effects relative to the larger sample. Essentially, how much utility do you sacrifice by restricting your portfolio to a given theme of securities? <br><br>
+This project aims to assess the utility of a given portfolio theme (i.e., sustainability, low beta, Technology, etc.) when compared to a larger sample benchmark (the S&P 500). At large scale (the big question), research in this area aims to validate the marginal utility of increased diversification by showing compromises in utility in a given subset of the larger sample. More directly, this research aims to show which themes of portfolios have which effects relative to the larger sample. Essentially, how much utility do you sacrifice by restricting your portfolio to a given theme of securities? <br>
+***Official Research Question:*** How many utils are sacrificed/gained based by investing in a specifically themed portfolio? <br><br>
 **What it will look like** <br>
 To visualize this, the project will create a dashboard that graphs the efficient frontier of a large sample (the S&P 500). Additionally, upon selection, the dashboard will then graph the efficient frontier of the subsample of the data based on a given portfolio theme. The themes will include:
  - Stability <br>
