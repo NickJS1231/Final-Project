@@ -12,7 +12,7 @@ To visualize this, the project will create a dashboard that graphs the efficient
  - Cheapest equities <br>
  - Firms that create or deliver pizza i.e. Domino’s, Grubhub <br>
  - Tickers that contain the letters “L”, “E”, “H”, “I”, or “G” <br>
- - Etc. <br>
+ - Etc. <br> <br>
 **The Analysis will then assess the following:** <br>
  - Which firms are included in the subset vs the benchmark? <br>
  - What is the marginal utility of the subset (assessed through the utility equation) <br>
@@ -29,40 +29,22 @@ To visualize this, the project will create a dashboard that graphs the efficient
 ### File Structure <br>
  - Inputs and Cleaning: think of this as a combination of the get text and build sample files from the midterm, being that data acquisition will be simpler, it can be incorporated into the build sample file. This will also include the computation of returns and assignment of firms to applicable subsets. A final dataframe of firms, portfolio categorizations (a binary variable that states if its in a given portfolio), returns and variances will be generated and sent into outputs <br><br>
  - Outputs: This file will include all code necessary to run the dashboard and will also incorporate the dynamic graphing of the efficient frontiers, calculation of utility scores, and all needed user input interface aspects. <br>
-   - See pseudo code below for data transformation and output creation    
+   - See pseudo code below for data transformation and output creation    <br><br>
 
-Pseudo-Code Procedure
+**Pseudo-Code Procedure** <br>
 
 1. Import dataset.
-2. Depends on methodology i.e.
-OpenBloomberg?
-yfinance
-Predetermined dataframe?
-Selectable dataframe?
-Calculate Return and variance of each security over a specified time horizon
-Define levels of risk aversion (create arbitrarily calculated, selectable levels of “riskiness rather than using an assessment)
-Research best ways to do this
-With risk aversion and user-selected goals, able to calculate capital allocation 
-Set aside percentage of capital for risk free assets
-With equity section, continue to next step
-Trim dataset depending on user-selected goals
-Growth
-Stability
-Technology
-Low Beta
-ESG Firms
-Firms headquartered in Pennsylvania
-Most expensive equities
-Cheapest equities
-Firms that create or deliver pizza i.e. Domino’s, Grubhub
-Tickers that contain the letters “L”, “E”, “H”, “I”, or “G”
-Etc.
-Calculate efficient frontier curves for entire dataset as well as the user-selected goal-oriented dataset-trim
-Calculate distances between firms in the trimmed-dataset and the benchmark frontier curve
-Add highest ranked (closest) firms to frontier curve to optimal equity list based on a user-selected number of securities to include
-Utility calculations
-Using utility theory function to calculate the given utility score of a portfolio
-Compare utility score across portfolio to determine sacrifices/gains of a given portfolio.
+2. Depends on methodology (i.e. OpenBloomberg, yfinance)
+3. Calculate Return and variance of each security over a specified time horizon
+4. Define levels of risk aversion (create arbitrarily calculated, selectable levels of “riskiness rather than using an assessment) (Research best ways to do this)
+5. With risk aversion and user-selected goals, able to calculate capital allocation 
+ a. Set aside percentage of capital for risk free assets
+ b. With equity section, continue to next step
+6. Trim dataset depending on user-selected goals (see themes above)
+7. Calculate efficient frontier curves for entire dataset as well as the user-selected goal-oriented dataset-trim
+8. Calculate distances between firms in the trimmed-dataset and the benchmark frontier curve
+9. Add highest ranked (closest) firms to frontier curve to optimal equity list based on a user-selected number of securities to include
+10. Utility calculations: Using utility theory function to calculate the given utility score of a portfolio, compare utility score across portfolios to determine sacrifices/gains of a given portfolio.
 
 
 
