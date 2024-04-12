@@ -1,7 +1,7 @@
 # Portfolio Utility: A Comparative Analysis <br> <br>
 ### The Research <br> <br>
 This project aims to assess the utility of a given portfolio theme (i.e., sustainability, low beta, Technology, etc.) when compared to a larger sample benchmark (the S&P 500). At large scale (the big question), research in this area aims to validate the marginal utility of increased diversification by showing compromises in utility in a given subset of the larger sample. More directly, this research aims to show which themes of portfolios have which effects relative to the larger sample. Essentially, how much utility do you sacrifice by restricting your portfolio to a given theme of securities? <br><br>
-**What it will look like** <br><br>
+**What it will look like** <br>
 To visualize this, the project will create a dashboard that graphs the efficient frontier of a large sample (the S&P 500). Additionally, upon selection, the dashboard will then graph the efficient frontier of the subsample of the data based on a given portfolio theme. The themes will include:
  - Stability <br>
  - Technology <br>
@@ -13,12 +13,12 @@ To visualize this, the project will create a dashboard that graphs the efficient
  - Firms that create or deliver pizza i.e. Domino’s, Grubhub <br>
  - Tickers that contain the letters “L”, “E”, “H”, “I”, or “G” <br>
  - Etc. <br>
-**The Analysis will then assess the following:** <br><br>
+**The Analysis will then assess the following:** <br>
  - Which firms are included in the subset vs the benchmark? <br>
  - What is the marginal utility of the subset (assessed through the utility equation) <br>
  - Given different risk aversion levels (different points on the capital allocation line), how much more or less efficient does the subset become? <br>
  - Another ***potential*** area of interest for this dashboard could be providing explanatory insight into the above metrics over the course of time.  For example, how has the sustainability portfolio performed over the past five years as opposed to the prior five before that? How does the efficient set’s comparison to the benchmark change over time? Does time show trends of certain portfolio groups improving in utility? <br><br>
-### The Data<br><br>
+### The Data<br>
  - The final dataset used to perform an analysis will contain each firm and its return/variance over a given period of time. <br>
  - Dependent on adopting the time aspect of this model, the unit of observation will either be firm, or firm-time-period (i.e., 3yr CAGR foro 15 years of data). <br>
  - Sample period will depend on the adoption mentioned above, but at minimum will be a 1yr time from for which to compound returns over <br>
@@ -26,7 +26,7 @@ To visualize this, the project will create a dashboard that graphs the efficient
  - Data on returns, ticker, potential categorization values (i.e., ESG scores, beta etc.) are required and will likely need to be merged from multiple datasets.<br>
  - Raw data for all of the above is available, calculation of returns and variance will be required. This data will not be collected, rather computed off of raw data. <br>
  - Inputs will be return data and necessary thematic descriptors. Data will be stored as follows: <br><br>
-### File Structure <br><br>
+### File Structure <br>
  - Inputs and Cleaning: think of this as a combination of the get text and build sample files from the midterm, being that data acquisition will be simpler, it can be incorporated into the build sample file. This will also include the computation of returns and assignment of firms to applicable subsets. A final dataframe of firms, portfolio categorizations (a binary variable that states if its in a given portfolio), returns and variances will be generated and sent into outputs <br><br>
  - Outputs: This file will include all code necessary to run the dashboard and will also incorporate the dynamic graphing of the efficient frontiers, calculation of utility scores, and all needed user input interface aspects. <br>
    - See pseudo code below for data transformation and output creation    
