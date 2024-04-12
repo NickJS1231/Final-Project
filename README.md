@@ -13,7 +13,7 @@ To visualize this, the project will create a dashboard that graphs the efficient
  - Cheapest equities <br>
  - Firms that create or deliver pizza i.e. Domino’s, Grubhub <br>
  - Tickers that contain the letters “L”, “E”, “H”, “I”, or “G” <br>
- - Etc. <br> <br> <br>
+ - Etc. <br> <br>
 
 **The Analysis will then assess the following:** <br>
  - Which firms are included in the subset vs the benchmark? <br>
