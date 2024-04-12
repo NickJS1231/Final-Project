@@ -48,6 +48,8 @@ To visualize this, the project will create a dashboard that graphs the efficient
 9. Add highest ranked (closest) firms to frontier curve to optimal equity list based on a user-selected number of securities to include
 10. Utility calculations: Using utility theory function to calculate the given utility score of a portfolio, compare utility score across portfolios to determine sacrifices/gains of a given portfolio.
 
+![alt text](https://github.com/[NickJS1231]/[Final-Project]/blob/[branch]/image.jpg?raw=true)
+
 
 
 
