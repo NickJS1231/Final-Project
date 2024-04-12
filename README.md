@@ -46,8 +46,9 @@ To visualize this, the project will create a dashboard that graphs the efficient
 7. Calculate efficient frontier curves for entire dataset as well as the user-selected goal-oriented dataset-trim
 8. Calculate distances between firms in the trimmed-dataset and the benchmark frontier curve
 9. Add highest ranked (closest) firms to frontier curve to optimal equity list based on a user-selected number of securities to include
-10. Utility calculations: Using utility theory function to calculate the given utility score of a portfolio, compare utility score across portfolios to determine sacrifices/gains of a given portfolio.
+10. Utility calculations: Using utility theory function to calculate the given utility score of a portfolio, compare utility score across portfolios to determine sacrifices/gains of a given portfolio. <br> <br>
 
+### Sample of Dashboard
 ![Alt text](FP.png)
 
 
