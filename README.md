@@ -29,25 +29,27 @@ To visualize this, the project will create a dashboard that graphs the efficient
  - Raw data for all of the above is available, calculation of returns and variance will be required. This data will not be collected, rather computed off of raw data. <br>
  - Inputs will be return data and necessary thematic descriptors. Data will be stored as follows: <br><br>
 ### File Structure <br>
- - Inputs and Cleaning: think of this as a combination of the get text and build sample files from the midterm, being that data acquisition will be simpler, it can be incorporated into the build sample file. This will also include the computation of returns and assignment of firms to applicable subsets. A final dataframe of firms, portfolio categorizations (a binary variable that states if its in a given portfolio), returns and variances will be generated and sent into outputs <br><br>
- - Outputs: This file will include all code necessary to run the dashboard and will also incorporate the dynamic graphing of the efficient frontiers, calculation of utility scores, and all needed user input interface aspects. <br>
-   - See pseudo code below for data transformation and output creation    <br><br>
-
+ - Get data: data including: ticker, price, beta, gsector, and esg score will be downloaded in a get data file, that will produce a finalized CV alonside a variance ovariance matrix.
+ - Dashboard: a pytyhon file will be used to generate a dashboard that then performs all analysis including plotting, utility scoring and comparison, etc.
 **Pseudo-Code Procedure** <br>
 
-1. Import dataset.
-2. Depends on methodology (i.e. OpenBloomberg, yfinance)
-3. Calculate Return and variance of each security over a specified time horizon
-4. Define levels of risk aversion (create arbitrarily calculated, selectable levels of “riskiness rather than using an assessment) (Research best ways to do this)
-5. With risk aversion and user-selected goals, able to calculate capital allocation <br>
+1. Import dataset (yfinance)
+2. Potential merging required.
+3. Output CSV
+4. In python file:
+5. Import efficient fronteir and relevant packages
+7. Define levels of risk aversion (create arbitrarily calculated, selectable levels of “riskiness rather than using an assessment)
+9. Calculate Return and variance of each security over a specified time horizon
+10. Subset firms into according portfolio groups
+11. With risk aversion and user-selected goals, able to calculate capital allocation <br>
  a. Set aside percentage of capital for risk free assets<br>
  b. With equity section, continue to next step
-6. Trim dataset depending on user-selected goals (see themes above)
-7. Calculate efficient frontier curves for entire dataset as well as the user-selected goal-oriented dataset-trim
-8. Calculate distances between firms in the trimmed-dataset and the benchmark frontier curve
-9. Add highest ranked (closest) firms to frontier curve to optimal equity list based on a user-selected number of securities to include
-10. Utility calculations: Using utility theory function to calculate the given utility score of a portfolio, compare utility score across portfolios to determine sacrifices/gains of a given portfolio. <br>
+13. Calculate efficient frontier curves for entire dataset as well as the user-selected goal-oriented dataset-trim
+14. Calculate distances between firms in the trimmed-dataset and the benchmark frontier curve (variance covariance matrix)
+15. Add highest ranked (closest) firms to frontier curve to optimal equity list based on a user-selected number of securities to include
+16. Utility calculations: Using utility theory function to calculate the given utility score of a portfolio, compare utility score across portfolios to determine sacrifices/gains of a given portfolio. <br>
 Utility Score Formula: U = E(r)-(1/2)A*o*^2<br>
+17. Based on strategy, provide some commentary
 
 ### Sample of Dashboard
 ![Alt text](FP.png)
