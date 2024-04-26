@@ -20,9 +20,7 @@ st.set_page_config(
 )
 
 """
-# CAPM Portfolio Optimization with Risk Aversion Adjustment 
-
-by KKKKKKKKwow
+# Thematic Investing: How good is your strategy?
 """
 
 #############################################
@@ -77,16 +75,28 @@ with st.sidebar:
        
     '''
     ---
-    ### Part 2: What is the most leverage are you willing to take on? 
-    
-    Some people are willing to put all their money in the market. For others, it might make sense to borrow additional money to put into the market. 
-    
-    For example, leverage is 1 when all your money is in the market, and 2 if you borrowed enough to double your investment in the market.
-    
-    Allowing leverage to exceed 1x is not typical. 
+    # THEMES
+    ## Choose your adventure
     '''
        
-    leverage = st.number_input('Maximum leverage',1,10,value=1)
+    option = st.selectbox(
+   'Select your theme :)',
+   ('ESG Investing', 'L,E,H,I,G', 'I like my beta low', 'Tech is the future', 'Sector'))
+    st.write(f"**You selected: {option}**")
+    options_info = {'ESG Investing': "ESG investing has been growing in recent years. It incorporates Environmental, Social, and Governance factors of the firms.",
+    'L,E,H,I,G': "This theme includes companies whose tickers contain the letters L, E, H, I, or G.",
+    'I like my beta low': "Low beta stocks tend to be less volatile and less risky than the overall market.",
+    'Tech is the future': "This theme focuses on companies in the technology sector, which is known for its innovation and growth potential."}
+    st.write(options_info.get(option, "No info available"))
+    if option == 'Sector':
+       sectors = ['Industrials', 'Healthcare', 'Technology', 'Utilities', 'Financial Services', 'Basic Materials', 'Consumer Cyclical', 'Real Estate', 'Communication Services', 'Consumer Defensive', 'Energy']
+       selected_sectors = st.multiselect('Select the sectors:', sectors)
+       st.write(f"**You selected the following sectors: {', '.join(selected_sectors)}**")
+    else:
+       st.write(options_info.get(option, "No info available"))
+       st.write(f"**You selected: {option}**")
+
+    
     
     '''
     ---
