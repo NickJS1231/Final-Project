@@ -38,41 +38,8 @@ with st.sidebar:
          6 :[.75,0,.25,100  ]}    
 
     """
-    ## Risk aversion assessment
-
-    ### Part 1: How much would you pay to enter the following lotteries?
+    # Decide your Future
     """
-    ans = {}
-    for i in range(1,len(qs)+1):
-        rn = qs[i][0]*qs[i][1] + qs[i][2]*qs[i][3]
-        ans[i] = st.slider(f'{int(qs[i][0]*100)}% chance of \${qs[i][1]} and {int(qs[i][2]*100)}% chance of \${qs[i][3]}',
-                           0.0,rn,rn,0.1, key=i)
-    
-    risk_aversion = 0
-    for i in range(1,len(qs)+1):
-        
-        # quadratic util: mu - 0.5 * A * var
-        # here, set util = willing to pay, solve for A
-        
-        exp = qs[i][0]* qs[i][1]          +  qs[i][2]* qs[i][3]
-        var = qs[i][0]*(qs[i][1]-exp)**2  +  qs[i][2]*(qs[i][3]-exp)**2
-        
-        implied_a = 2*(exp-ans[i])/var
-           
-        risk_aversion += implied_a
-  
-    if risk_aversion < 0.000001: # avoid the float error when risk_aversion is too small
-       risk_aversion = 0.000001    
-       
-    f'''
-    #### Result: Using the survey, your risk aversion parameter is {risk_aversion:.3f}
-    ---
-    ### If you want, you can override that parameter here:
-    
-    '''
-    
-    risk_aversion = st.number_input('Risk aversion parameter',0.000001,float(5),format='%0.2f',value=risk_aversion)
-       
     '''
     ---
     # THEMES
@@ -81,13 +48,12 @@ with st.sidebar:
        
     option = st.selectbox(
    'Select your theme :)',
-   ('ESG Investing', 'L,E,H,I,G', 'I like my beta low', 'Tech is the future', 'Sector'))
-    st.write(f"**You selected: {option}**")
+   ('ESG Investing', 'L,E,H,I,G,H', 'I like my beta low', 'I am not high, beta is', 'Sector','Highest Price per Shares'))
     options_info = {'ESG Investing': "ESG investing has been growing in recent years. It incorporates Environmental, Social, and Governance factors of the firms.",
     'L,E,H,I,G': "This theme includes companies whose tickers contain the letters L, E, H, I, or G.",
     'I like my beta low': "Low beta stocks tend to be less volatile and less risky than the overall market.",
-    'Tech is the future': "This theme focuses on companies in the technology sector, which is known for its innovation and growth potential."}
-    st.write(options_info.get(option, "No info available"))
+    'I am not high, beta is': "This theme focuses on companies in the technology sector, which is known for its innovation and growth potential.",
+    'Highest Price per Shares':" This will give you firms that have the highest price per shares"}
     if option == 'Sector':
        sectors = ['Industrials', 'Healthcare', 'Technology', 'Utilities', 'Financial Services', 'Basic Materials', 'Consumer Cyclical', 'Real Estate', 'Communication Services', 'Consumer Defensive', 'Energy']
        selected_sectors = st.multiselect('Select the sectors:', sectors)
@@ -100,12 +66,22 @@ with st.sidebar:
     
     '''
     ---
-    ### Part 3 (Optional): Upload a custom list of tickers
-    
-    Must be a csv file with one ticker per line. Maximum of 100 tickers. 
+    # YEAR
     '''
+    start_year, end_year = st.select_slider(     'Select your timeline',     options=['2019', '2020', '2021', '2022', '2023', '2024'],     value=('2019', '2024'))     
+    st.write('You selected years between', start_year, 'and', end_year)
+    '''
+    ---
+    ## RISK
+    '''
+    risk_levels = st.radio(
+    "How risky do you want to be?",
+    [":rainbow[Mild Risk]", ":rainbow[Moderate]", ":rainbow[Elevated Risk]", ":rainbow[Severe Risk]", ":rainbow[Extreme Risk]"],
+    index=None ,
+     )
+
+    st.write("You selected:", risk_levels)
     
-    uploaded_file = st.file_uploader("Choose a CSV file with tickers")
     
     '''
     
