@@ -66,7 +66,42 @@ if __name__ == "__main__":
       f.write('%f' % risk_free_rate)
 
 
+# def get_theme_assets(option, start_year, end_year, risk_level):
+#     """
+#     Returns a list of assets based on the selected theme and risk level.
+#     """
+#     stocks = pd.read_csv('sp500_stocks.csv')
 
+#     if option == 'ESG Investing':
+#         esg_scores = pd.read_csv('esg_scores.csv')
+#         stocks = stocks.sort_values('Total-Score', ascending=False)
+#         asset_list = stocks['Ticker'].tolist()[:100]
+#     elif option == 'L,E,H,I,G,H':
+#         asset_list = stocks[stocks['Ticker'].str.contains('L|E|H|I|G', case=False)]['Ticker'].tolist()
+#    elif option == 'I like my beta low':
+#     stocks = stocks[stocks['Beta'].notnull()]  # Exclude rows with missing 'Beta' values
+#     stocks = stocks.sort_values('Beta', ascending=True)
+#     asset_list = stocks['Symbol'].tolist()[:10]
+#     elif option == 'I am not high, beta is':
+#         stocks = stocks[stocks['Sector'] == 'Technology']
+#         asset_list = stocks['Symbol'].tolist()
+#     elif option == 'Highest Price per Shares':
+#         stocks = stocks.sort_values('Price', ascending=False)
+#         asset_list = stocks['Symbol'].tolist()[:10]
+#     elif option == 'Sector':
+#         stocks = stocks[stocks['Sector'].isin(selected_sectors)]
+#         asset_list = stocks['Symbol'].tolist()
+
+#     if risk_level == ':rainbow[Mild Risk]':
+#         asset_list = asset_list[:20]
+#     elif risk_level == ':rainbow[Moderate]':
+#         asset_list = asset_list[:50]
+#     elif risk_level == ':rainbow[Elevated Risk]':
+#         asset_list = asset_list[:80]
+#     elif risk_level == ':rainbow[Severe Risk]':
+#         asset_list = asset_list[:100]
+#     elif risk_level == ':rainbow[Extreme Risk]':
+#         asset_list = asset_
 
 
 
