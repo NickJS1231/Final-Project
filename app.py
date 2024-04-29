@@ -13,8 +13,8 @@ pio.renderers.default='browser' # use when doing dev in Spyder (to show figs)
 
 # Page config
 st.set_page_config(
-    "Portfolio Opt by WSB, Ported to Streamlit by Don Bowen",
-    "📊",
+    "Thematic Investing: A Utility Comparison",
+    "📈",
     initial_sidebar_state="expanded",
     layout="wide",
 )
@@ -38,10 +38,9 @@ with st.sidebar:
          6 :[.75,0,.25,100  ]}    
 
     """
-    # Decide your Future
+     **INPUTS**
     """
     '''
-    ---
     # THEMES
     ## Choose your adventure
     '''
@@ -50,9 +49,9 @@ with st.sidebar:
    'Select your theme :)',
    ('ESG Investing', 'L,E,H,I,G,H', 'I like my beta low', 'I am not high, beta is', 'Sector','Highest Price per Shares'))
     options_info = {'ESG Investing': "ESG investing has been growing in recent years. It incorporates Environmental, Social, and Governance factors of the firms.",
-    'L,E,H,I,G': "This theme includes companies whose tickers contain the letters L, E, H, I, or G.",
+    'L,E,H,I,G,H': "This theme includes companies whose tickers contain the letters L, E, H, I, or G.",
     'I like my beta low': "Low beta stocks tend to be less volatile and less risky than the overall market.",
-    'I am not high, beta is': "This theme focuses on companies in the technology sector, which is known for its innovation and growth potential.",
+    'I am not high, beta is': "High beta stocks",
     'Highest Price per Shares':" This will give you firms that have the highest price per shares"}
     if option == 'Sector':
        sectors = ['Industrials', 'Healthcare', 'Technology', 'Utilities', 'Financial Services', 'Basic Materials', 'Consumer Cyclical', 'Real Estate', 'Communication Services', 'Consumer Defensive', 'Energy']
@@ -311,3 +310,4 @@ st.plotly_chart(fig5,use_container_width=True)
 - The red star is the optimal portfolio combining the risk free asset and the tangency portfolio, based on your risk aversion parameter and choice of maximum allowable leverage
 - If your leverage is more than 1 and your risk aversion low enough, the optimal portfolio might involve borrowing money to invest in equities; if so, the red star will be to the right of the blue star
 '''
+
