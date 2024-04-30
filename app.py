@@ -67,10 +67,10 @@ with st.sidebar:
     
     '''
     ---
-    # YEAR
+    # YEAR probably will not use this, only if we have multi year var-covar; time permatting
     '''
-    start_year, end_year = st.select_slider(     'Select your timeline',     options=['2019', '2020', '2021', '2022', '2023', '2024'],     value=('2019', '2024'))     
-    st.write('You selected years between', start_year, 'and', end_year)
+    # start_year, end_year = st.select_slider(     'Select your timeline',     options=['2019', '2020', '2021', '2022', '2023', '2024'],     value=('2019', '2024'))     
+    # st.write('You selected years between', start_year, 'and', end_year)
     '''
     ---
     ## RISK
