@@ -164,8 +164,8 @@ def get_plotting_structures(asset_list=None):
         
         # get the x,y values for asset in scatter
         
-        e_returns = pd.read_csv('inputs/e_returns.csv',index_col=0).squeeze()
-        cov_mat   = pd.read_csv('inputs/cov_mat.csv',index_col=0)        
+        e_returns = pd.read_csv('inputs/expected_returns.csv',index_col=0).squeeze()
+        cov_mat   = pd.read_csv('inputs/covariance_matrix_returns.csv',index_col=0)        
         
     else:
         
