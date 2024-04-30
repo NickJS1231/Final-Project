@@ -198,10 +198,7 @@ def get_plotting_structures(asset_list=None):
     # to make faster, just 20 points
     # but we want more points at the front of EF where it is curviest --> logscale 
     
-    risk_range     = np.logspace(np.log(vol_min_vol+.000001), 
-                                 np.log(assets[1].max()), 
-                                 20, 
-                                 base=np.e)
+    risk_range     = np.arange(1,6)
     ret_ef, vol_ef = get_ef_points(ef, 'risk', risk_range) 
     
     ef_points      = [ret_ef,vol_ef]
@@ -214,11 +211,6 @@ def get_plotting_structures(asset_list=None):
 # decide on assets: default list or uploaded list
 ###############################################################################
 
-if uploaded_file is not None:
-    asset_list = pd.read_csv(uploaded_file,header=None,names=['asset'])
-    asset_list = asset_list['asset'].to_list()[:100] # convert to list, max 100 allowed
-else:
-    asset_list = None 
 
 ###############################################################################
 # get E(r) vol of Max Utility portfolio with leverage and RF asset 
