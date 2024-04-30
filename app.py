@@ -39,21 +39,34 @@ with st.sidebar:
     ## Choose your adventure
     '''
        
-    option = st.selectbox(
-   'Select your theme :)',
-   ('ESG Investing', 'L,E,H,I,G,H', 'I like my beta low', 'I am not high, beta is', 'Sector','Highest Price per Shares'))
-    options_info = {'ESG Investing': "ESG investing has been growing in recent years. It incorporates Environmental, Social, and Governance factors of the firms.",
-    'L,E,H,I,G,H': "This theme includes companies whose tickers contain the letters L, E, H, I, or G.",
-    'I like my beta low': "Low beta stocks tend to be less volatile and less risky than the overall market.",
-    'I am not high, beta is': "High beta stocks",
-    'Highest Price per Shares':" This will give you firms that have the highest price per shares"}
-    if option == 'Sector':
-       sectors = ['Industrials', 'Healthcare', 'Technology', 'Utilities', 'Financial Services', 'Basic Materials', 'Consumer Cyclical', 'Real Estate', 'Communication Services', 'Consumer Defensive', 'Energy']
-       selected_sectors = st.multiselect('Select the sectors:', sectors)
-       st.write(f"**You selected the following sectors: {', '.join(selected_sectors)}**")
-    else:
-       st.write(options_info.get(option, "No info available"))
-       st.write(f"**You selected: {option}**")
+
+    def theme_selector():
+        option = st.selectbox(
+        'Select your theme :)',
+        ('ESG Investing', 'L,E,H,I,G,H', 'I like my beta low', 'I am not high, beta is', 'Sector','Highest Price per Shares'))
+    
+        options_info = {
+            'ESG Investing': "ESG investing has been growing in recent years. It incorporates Environmental, Social, and Governance factors of the firms.",
+            'L,E,H,I,G,H': "This theme includes companies whose tickers contain the letters L, E, H, I, or G.",
+            'I like my beta low': "Low beta stocks tend to be less volatile and less risky than the overall market.",
+            'I am not high, beta is': "High beta stocks",
+            'Highest Price per Shares': "This will give you firms that have the highest price per shares"
+    }
+    
+        selected_sectors = []
+        if option == 'Sector':
+            sectors = ['Industrials', 'Healthcare', 'Technology', 'Utilities', 'Financial Services', 'Basic Materials', 'Consumer Cyclical', 'Real Estate', 'Communication Services', 'Consumer Defensive', 'Energy']
+            selected_sectors = st.multiselect('Select the sectors:', sectors)
+            st.write(f"**You selected the following sectors: {', '.join(selected_sectors)}**")
+        else:
+            st.write(options_info.get(option, "No info available"))
+            st.write(f"**You selected: {option}**")
+    
+        return option, selected_sectors
+# Usage
+    selected_sectors = theme_selector()
+# Now you can apply the selected sectors as needed in your code
+
 
     
     
@@ -75,17 +88,17 @@ with st.sidebar:
     
     # todo - didn't think about these numbers AT ALL, adjust them
     if risk_levels == ":rainbow[Mild Risk]":
-        risk_aversion = .5 
+        risk_aversion = 3
     elif risk_levels == ":rainbow[Moderate]":
-        risk_aversion = 1
+        risk_aversion = 2.5
     elif risk_levels == ":rainbow[Elevated Risk]":
         risk_aversion = 2
     elif risk_levels == ":rainbow[Severe Risk]":
-        risk_aversion = 3
+        risk_aversion = 1.75
     elif risk_levels == ":rainbow[Extreme Risk]":
-        risk_aversion = 4
+        risk_aversion = .75
     else:
-        risk_aversion = 2
+        risk_aversion = 10
 
     st.write("You selected:", risk_levels)
     
@@ -222,7 +235,7 @@ def get_plotting_structures(asset_list=None):
 ###############################################################################
 
 asset_list = pd.read_csv('inputs/sp500_tickers.csv',header=None,names=['asset'])
-asset_list = asset_list['asset'].to_list()[:10]
+asset_list = asset_list['asset'].to_list()[:100]
 
 ###############################################################################
 # get E(r) vol of Max Utility portfolio with leverage and RF asset 
@@ -303,6 +316,37 @@ fig5 = go.Figure(data=fig1.data + fig2.data + fig3.data + fig4.data, layout = fi
 fig5.update_layout(height=600) 
 
 st.plotly_chart(fig5,use_container_width=True)
+
+# def get_theme_assets(option, selected_sectors):
+#     """
+#     Returns a list of assets based on the selected theme and risk level.
+#     """
+#     stocks = pd.read_csv('data_scores.csv')
+
+#     if option == 'ESG Investing':
+#         #The df needs to be subsetted into one row per firm
+#         stocks = stocks.sort_values('Total-Score', ascending=False)
+#         subset_asset_list = stocks['Ticker'].tolist()[:100]
+#     elif option == 'L,E,H,I,G,H':
+#         subset_asset_list = stocks[stocks['Ticker'].str.contains('L|E|H|I|G|H', case=False)]['Ticker'].tolist()
+#     elif option == 'I like my beta low':
+#         stocks = stocks[stocks['Beta'].notnull()]  # Exclude rows with missing 'Beta' values
+#         stocks = stocks.sort_values('Beta', ascending=True)
+#         subset_asset_list = stocks['Symbol'].tolist()[:50]
+#     elif option == 'I am not high, beta is':
+#         stocks = stocks[stocks['Beta'].notnull()]
+#         stocks = stocks.sort_values('Beta', ascending=False)
+#         subset_asset_list = stocks['Symbol'].tolist()[:50]
+#     elif option == 'Highest Price per Shares':
+#         stocks = stocks.sort_values('Price', ascending=False)
+#         subset_asset_list = stocks['Symbol'].tolist()[:50]
+#     elif option == 'Sector':
+#         stocks = stocks[stocks['Sector'].isin(selected_sectors)]
+#         subset_asset_list = stocks['Symbol'].tolist()
+#     return subset_asset_list
+
+# subset_asset_list = get_theme_assets(selected_sectors[0], selected_sectors[1])
+
 
 
 '''
