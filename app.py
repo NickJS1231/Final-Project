@@ -211,6 +211,9 @@ def get_plotting_structures(asset_list=None):
 # decide on assets: default list or uploaded list
 ###############################################################################
 
+    asset_list = pd.read_csv('inputs/sp500_tickers.csv',header=None,names=['asset'])
+    asset_list = asset_list['asset'].to_list() 
+
 
 ###############################################################################
 # get E(r) vol of Max Utility portfolio with leverage and RF asset 

@@ -20,7 +20,7 @@ def get_data(asset_list=None):
     # get etf prices
 
     if not asset_list:
-        with open('inputs/sp500_.csv', newline='') as f:
+        with open('inputs/sp500_tickers.csv', newline='') as f:
             reader = csv.reader(f)
             asset_list = [l[0] for l in reader]
       
