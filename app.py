@@ -31,14 +31,6 @@ st.set_page_config(
 
 with st.sidebar:
 
-    # % chance lose, $ lose, % chance win, $win, CARA formula e, CARA formula V
-    qs ={1 :[.50,0,.50,10   ],
-         2 :[.50,0,.50,1000 ],
-         3 :[.90,0,.10,10   ],
-         4 :[.90,0,.10,1000 ],
-         5 :[.25,0,.75,100  ],
-         6 :[.75,0,.25,100  ]}    
-
     """
      **INPUTS**
     """
@@ -80,6 +72,20 @@ with st.sidebar:
     [":rainbow[Mild Risk]", ":rainbow[Moderate]", ":rainbow[Elevated Risk]", ":rainbow[Severe Risk]", ":rainbow[Extreme Risk]"],
     index=None ,
      )
+    
+    # todo - didn't think about these numbers AT ALL, adjust them
+    if risk_levels == ":rainbow[Mild Risk]":
+        risk_aversion = .5 
+    elif risk_levels == ":rainbow[Moderate]":
+        risk_aversion = 1
+    elif risk_levels == ":rainbow[Elevated Risk]":
+        risk_aversion = 2
+    elif risk_levels == ":rainbow[Severe Risk]":
+        risk_aversion = 3
+    elif risk_levels == ":rainbow[Extreme Risk]":
+        risk_aversion = 4
+    else:
+        risk_aversion = 2
 
     st.write("You selected:", risk_levels)
     
@@ -187,7 +193,6 @@ def get_plotting_structures(asset_list=None):
         
     ef_max_sharpe.max_sharpe(risk_free_rate=rf_rate)
     ret_tangent, vol_tangent, sharpe_tangent = ef_max_sharpe.portfolio_performance(risk_free_rate=rf_rate)
-    
     tangency_port = [ret_tangent, vol_tangent, sharpe_tangent]
             
     # prelim step: get the min vol (vol_min_vol is where we will start the efficient frontier)
@@ -200,9 +205,12 @@ def get_plotting_structures(asset_list=None):
     # to make faster, just 20 points
     # but we want more points at the front of EF where it is curviest --> logscale 
     
-    risk_range     = np.arange(1,6)
+    risk_range     = np.logspace(np.log(vol_min_vol+.000001), 
+                                 np.log(assets[1].max()), 
+                                 20, 
+                                 base=np.e)
+
     ret_ef, vol_ef = get_ef_points(ef, 'risk', risk_range) 
-    
     ef_points      = [ret_ef,vol_ef]
     
     return rf_rate, assets, ef_points, tangency_port
@@ -216,7 +224,6 @@ def get_plotting_structures(asset_list=None):
 asset_list = pd.read_csv('inputs/sp500_tickers.csv',header=None,names=['asset'])
 asset_list = asset_list['asset'].to_list()[:10]
 
-
 ###############################################################################
 # get E(r) vol of Max Utility portfolio with leverage and RF asset 
 ###############################################################################
@@ -228,7 +235,7 @@ rf_rate, assets, ef_points, tangency_port = get_plotting_structures(asset_list)
 mu_cml      = np.array([rf_rate,tangency_port[0]])
 cov_cml     = np.array([[0,0],
                         [0,tangency_port[1]]])
-ef_max_util = EfficientFrontier(mu_cml,cov_cml,(-leverage+1,leverage))      
+ef_max_util = EfficientFrontier(mu_cml,cov_cml,(0,1)) # only allow leverage from 0 to 1, no shorting      
     
 ef_max_util.max_quadratic_utility(risk_aversion=risk_aversion)
 
