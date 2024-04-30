@@ -8,6 +8,7 @@ import streamlit as st
 from update_data_cache import get_data
 
 from pypfopt.efficient_frontier import EfficientFrontier
+from pypfopt import EfficientFrontier, exceptions
 
 pio.renderers.default='browser' # use when doing dev in Spyder (to show figs)
 
@@ -211,8 +212,8 @@ def get_plotting_structures(asset_list=None):
 # decide on assets: default list or uploaded list
 ###############################################################################
 
-    asset_list = pd.read_csv('inputs/sp500_tickers.csv',header=None,names=['asset'])
-    asset_list = asset_list['asset'].to_list() 
+asset_list = pd.read_csv('inputs/sp500_tickers.csv',header=None,names=['asset'])
+asset_list = asset_list['asset'].to_list()[:10]
 
 
 ###############################################################################
