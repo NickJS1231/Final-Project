@@ -317,35 +317,35 @@ fig5.update_layout(height=600)
 
 st.plotly_chart(fig5,use_container_width=True)
 
-# def get_theme_assets(option, selected_sectors):
-#     """
-#     Returns a list of assets based on the selected theme and risk level.
-#     """
-#     stocks = pd.read_csv('data_scores.csv')
+def get_theme_assets(option, selected_sectors):
+    """
+    Returns a list of assets based on the selected theme and risk level.
+    """
+    stocks = pd.read_csv('inputs/data_scores.csv')
 
-#     if option == 'ESG Investing':
-#         #The df needs to be subsetted into one row per firm
-#         stocks = stocks.sort_values('Total-Score', ascending=False)
-#         subset_asset_list = stocks['Ticker'].tolist()[:100]
-#     elif option == 'L,E,H,I,G,H':
-#         subset_asset_list = stocks[stocks['Ticker'].str.contains('L|E|H|I|G|H', case=False)]['Ticker'].tolist()
-#     elif option == 'I like my beta low':
-#         stocks = stocks[stocks['Beta'].notnull()]  # Exclude rows with missing 'Beta' values
-#         stocks = stocks.sort_values('Beta', ascending=True)
-#         subset_asset_list = stocks['Symbol'].tolist()[:50]
-#     elif option == 'I am not high, beta is':
-#         stocks = stocks[stocks['Beta'].notnull()]
-#         stocks = stocks.sort_values('Beta', ascending=False)
-#         subset_asset_list = stocks['Symbol'].tolist()[:50]
-#     elif option == 'Highest Price per Shares':
-#         stocks = stocks.sort_values('Price', ascending=False)
-#         subset_asset_list = stocks['Symbol'].tolist()[:50]
-#     elif option == 'Sector':
-#         stocks = stocks[stocks['Sector'].isin(selected_sectors)]
-#         subset_asset_list = stocks['Symbol'].tolist()
-#     return subset_asset_list
+    if option == 'ESG Investing':
+        #The df needs to be subsetted into one row per firm
+        stocks = stocks.sort_values('Total-Score', ascending=False)
+        subset_asset_list = stocks['Ticker'].tolist()[:100]
+    elif option == 'L,E,H,I,G,H':
+        subset_asset_list = stocks[stocks['Ticker'].str.contains('L|E|H|I|G|H', case=False)]['Ticker'].tolist()
+    elif option == 'I like my beta low':
+        stocks = stocks[stocks['Beta'].notnull()]  # Exclude rows with missing 'Beta' values
+        stocks = stocks.sort_values('Beta', ascending=True)
+        subset_asset_list = stocks['Symbol'].tolist()[:50]
+    elif option == 'I am not high, beta is':
+        stocks = stocks[stocks['Beta'].notnull()]
+        stocks = stocks.sort_values('Beta', ascending=False)
+        subset_asset_list = stocks['Symbol'].tolist()[:50]
+    elif option == 'Highest Price per Shares':
+        stocks = stocks.sort_values('Price', ascending=False)
+        subset_asset_list = stocks['Symbol'].tolist()[:50]
+    elif option == 'Sector':
+        stocks = stocks[stocks['Sector'].isin(selected_sectors)]
+        subset_asset_list = stocks['Symbol'].tolist()
+    return subset_asset_list
 
-# subset_asset_list = get_theme_assets(selected_sectors[0], selected_sectors[1])
+subset_asset_list = get_theme_assets(selected_sectors[0], selected_sectors[1])
 
 
 
