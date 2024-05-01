@@ -53,13 +53,13 @@ The creation process for this repo follows this process: <br>
   g. Generates a subset of the primary dataframe with one observation per firm <br>
   h. Outputs the needed data to "covariance_matrix_returns", "data_scores", "expected_returns", "sp500_data_with_scores", and "sp500_tickers"
 1. **`app.py`** - This is the python file that runs the streamlit dashboard you see. This file uses the following functions
- 1. **`theme_selector()`:** This function allows users to select thematic themes    or sectors from a dropdown menu in the sidebar. It returns the selected option     and any sectors chosen by the user.
+ - **`theme_selector()`:** This function allows users to select thematic themes    or sectors from a dropdown menu in the sidebar. It returns the selected option     and any sectors chosen by the user.
 
- 2. **`get_ef_points(ef, ef_param, ef_param_range)`:** This helper function         calculates the points on the efficient frontier based on an EfficientFrontier      object (`ef`) and a specified parameter (`ef_param`) over a range of values        (`ef_param_range`). It returns the expected returns and volatilities of the        portfolios.
+ - **`get_ef_points(ef, ef_param, ef_param_range)`:** This helper function         calculates the points on the efficient frontier based on an EfficientFrontier      object (`ef`) and a specified parameter (`ef_param`) over a range of values        (`ef_param_range`). It returns the expected returns and volatilities of the        portfolios.
 
- 3. **`get_plotting_structures(asset_list=None)`:** This function retrieves the     necessary data, such as expected returns, volatility, and risk-free rate, to       construct the efficient frontier. It also initializes the EfficientFrontier        object and computes the tangency portfolio. It returns these data structures for   plotting.
+ - **`get_plotting_structures(asset_list=None)`:** This function retrieves the     necessary data, such as expected returns, volatility, and risk-free rate, to       construct the efficient frontier. It also initializes the EfficientFrontier        object and computes the tangency portfolio. It returns these data structures for   plotting.
 
- 4. **`get_theme_assets(option, selected_sectors)`:** This function retrieves a     list of assets based on the selected theme or sectors. It filters stocks based on  the chosen option and returns a subset of asset tickers.
+ - **`get_theme_assets(option, selected_sectors)`:** This function retrieves a     list of assets based on the selected theme or sectors. It filters stocks based on  the chosen option and returns a subset of asset tickers.
 
 These functions are essential for collecting data, selecting thematic themes or sectors, calculating efficient frontier points, and retrieving assets based on user input. They facilitate the functionality of the dashboard by handling data processing and visualization tasks.
 
