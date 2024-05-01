@@ -30,7 +30,8 @@ To visualize this, the project will create a dashboard that graphs the efficient
  - Given different risk aversion levels (different points on the capital allocation line), how much more or less efficient does the subset become (based on utils)? <br> <br>
 The utility of a portfolio is calculated using the following formula:
 
-U = Expected Return - (1/2) * A^2 * σ^2
+U = Expected Return - (1/2) * A * σ^2
+<br> <br>
 
 Where:
 - \( U \) is the utility of the portfolio.
@@ -39,8 +40,25 @@ Where:
 - \( \sigma \) is the volatility (standard deviation) of returns.
 
 
-### The Data<br>
- - The final dataset used to perform an analysis will contain each firm and its return/variance over a given period of time. <br>
+### The Structure of this Repo<br>
+The creation process for this repo follows this process: <br>
+1. **getting_ESG_scores** This will generate a csv of firms and ESG scores for the desired population called "esg_scores".
+1. **Get_Data-Copy** - This is the file where all the data fun happens. When you run this file you will
+  a. Download the required data for the S&P 500 including variables required for themeatic subsetting (industry, beta, adj price, etc.) (2019-2023) <br>
+  b. Do some manual data manipulation to make working this data easier <br>
+  c. Appends ESG scores to the primary dataframe <br>
+  d. Gets the risk free rate needed for the analysis <br>
+  e. Calculates expected return for each firm <br>
+  f. Generates a variance covariance matrix <br>
+  g. Generates a subset of the primary dataframe with one observation per firm <br>
+  h. Outputs the needed data to "covariance_matrix_returns", "data_scores", "expected_returns", "sp500_data_with_scores", and "sp500_tickers"
+1. **`app.py`**
+  
+
+
+
+
+- The final dataset used to perform an analysis will contain each firm and its expected return/variance over a given period of time. <br>
  - Dependent on adopting the time aspect of this model, the unit of observation will either be firm, or firm-time-period (i.e., 3yr CAGR foro 15 years of data). <br>
  - Sample period will depend on the adoption mentioned above, but at minimum will be a 1yr time from for which to compound returns over <br>
  - Sample restrictions will be made based on the listed portfolio themes, research into the categories will determine specific selections of firms. <br>
@@ -50,28 +68,11 @@ Where:
 ### File Structure <br>
  - Get data: data including: ticker, price, beta, gsector, and esg score will be downloaded in a get data file, that will produce a finalized CV alonside a variance ovariance matrix.
  - Dashboard: a pytyhon file will be used to generate a dashboard that then performs all analysis including plotting, utility scoring and comparison, etc.
-**Pseudo-Code Procedure** <br>
 
-1. Import dataset (yfinance)
-2. Potential merging required.
-3. Output CSV
-4. In python file:
-5. Import efficient fronteir and relevant packages
-7. Define levels of risk aversion (create arbitrarily calculated, selectable levels of “riskiness rather than using an assessment)
-9. Calculate Return and variance of each security over a specified time horizon
-10. Subset firms into according portfolio groups
-11. With risk aversion and user-selected goals, able to calculate capital allocation <br>
- a. Set aside percentage of capital for risk free assets<br>
- b. With equity section, continue to next step
-13. Calculate efficient frontier curves for entire dataset as well as the user-selected goal-oriented dataset-trim
-14. Calculate distances between firms in the trimmed-dataset and the benchmark frontier curve (variance covariance matrix)
-15. Add highest ranked (closest) firms to frontier curve to optimal equity list based on a user-selected number of securities to include
-16. Utility calculations: Using utility theory function to calculate the given utility score of a portfolio, compare utility score across portfolios to determine sacrifices/gains of a given portfolio. <br>
-Utility Score Formula: U = E(r)-(1/2)A*o*^2<br>
-17. Based on strategy, provide some commentary
+
+
 
 ### Sample of Dashboard
-![Alt text](FP.png)
 
 
 
