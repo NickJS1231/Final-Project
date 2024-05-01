@@ -26,8 +26,18 @@ To visualize this, the project will create a dashboard that graphs the efficient
  <br> <br>
 
 **The Analysis will then assess the following:** <br>
- - What is the marginal utility of the subset (assessed through the utility equation) <br>
+ - What is the utility of the subset? What is the utility of the population? What is the difference between the two? <br>
  - Given different risk aversion levels (different points on the capital allocation line), how much more or less efficient does the subset become (based on utils)? <br> <br>
+The utility of a portfolio is calculated using the following formula:
+
+\[ U = \text{Expected Return} - \frac{1}{2} \times A^2 \times \sigma^2 \]
+
+Where:
+- \( U \) is the utility of the portfolio.
+- Expected Return is the expected return of the portfolio.
+- \( A \) is the risk aversion level.
+- \( \sigma \) is the volatility (standard deviation) of returns.
+
 
 ### The Data<br>
  - The final dataset used to perform an analysis will contain each firm and its return/variance over a given period of time. <br>
