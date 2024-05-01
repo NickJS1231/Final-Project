@@ -1,5 +1,5 @@
 # Portfolio Utility: A Comparative Analysis <br> <br>
-### The Research <br> 
+## The Research <br> 
 Are you an active investor? Have you ever tried to position your portfolio towards a specifc area to "maximize" your portfolio? If you have, this repo will teach you a valueable lesson: diversification rules! <br> <br>
 This project aims to assess the utility of a given portfolio theme (i.e., sustainability, low beta, sector specific investing, etc.) when compared to a larger population benchmark (the S&P 500 in this case). At large scale (the big question), research in this repo aims to validate the marginal utility of increased diversification, by showing compromises in utility in a given subset of the larger population. Essentially, how much utility do you sacrifice by restricting your portfolio to a given theme of securities? <br> <br>
 The dashboard in this project is based off of a previous dashboard in professor Don Bowen's "Data Science for Finance" Course, found here:(https://github.com/donbowen/portfolio-frontier-streamlit-dashboard). Our project builds on this dashboard by providing insight into the effect of portfolio themes. It deviates from the previous project by eliminating the option for leveraged portfolios and providing a risk quiz; it rather shows the difference in utility between a population of securities and a subset at a arbitrarily selected level of risk aversion. <br> <br>
@@ -40,7 +40,7 @@ Where:
 - \( \sigma \) is the volatility (standard deviation) of returns.
 
 
-### The Structure of this Repo<br>
+## The Structure of this Repo<br>
 The creation process for this repo follows this process: <br>
 1. **`getting_ESG_scores`** This will generate a csv of firms and ESG scores for the desired population called "esg_scores".
 1. **`Get_Data-Copy`** - This is the file where all the data fun happens. When you run this file you will <br>
@@ -63,7 +63,7 @@ The creation process for this repo follows this process: <br>
 
 These functions are essential for collecting data, selecting thematic themes or sectors, calculating efficient frontier points, and retrieving assets based on user input. They facilitate the functionality of the dashboard by handling data processing and visualization tasks.
 
-### Running This Yourself
+## Running This Yourself
 As per the prior projects instruction, here is how you can use this repo yourself
 1. A working python / Anaconda installation
 1. Git 
