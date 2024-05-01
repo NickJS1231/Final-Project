@@ -2,7 +2,7 @@
 ## The Research <br> 
 Are you an active investor? Have you ever tried to position your portfolio towards a specifc area to "maximize" your portfolio? If you have, this repo will teach you a valueable lesson: diversification rules! <br> <br>
 This project aims to assess the utility of a given portfolio theme (i.e., sustainability, low beta, sector specific investing, etc.) when compared to a larger population benchmark (the S&P 500 in this case). At large scale (the big question), research in this repo aims to validate the marginal utility of increased diversification, by showing compromises in utility in a given subset of the larger population. Essentially, how much utility do you sacrifice by restricting your portfolio to a given theme of securities? <br> <br>
-Visit the Dashboard here: (https://portfolio-utility-dashboard-nick0keisha0leo.streamlit.app/)
+Visit the Dashboard here: (https://portfolio-utility-dashboard-nick0keisha0leo.streamlit.app/) <br> <br>
 The dashboard in this project is based off of a previous dashboard in professor Don Bowen's "Data Science for Finance" Course, found here:(https://github.com/donbowen/portfolio-frontier-streamlit-dashboard). Our project builds on this dashboard by providing insight into the effect of portfolio themes. It deviates from the previous project by eliminating the option for leveraged portfolios and providing a risk quiz; it rather shows the difference in utility between a population of securities and a subset at a arbitrarily selected level of risk aversion. <br> <br>
 ***Official Research Question:*** How many utils are sacrificed/gained based by investing in a specifically themed portfolio? <br><br>
 **What this looks like** <br>
