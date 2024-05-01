@@ -42,8 +42,8 @@ Where:
 
 ### The Structure of this Repo<br>
 The creation process for this repo follows this process: <br>
-1. **getting_ESG_scores** This will generate a csv of firms and ESG scores for the desired population called "esg_scores".
-1. **Get_Data-Copy** - This is the file where all the data fun happens. When you run this file you will
+1. **`getting_ESG_scores`** This will generate a csv of firms and ESG scores for the desired population called "esg_scores".
+1. **`Get_Data-Copy`** - This is the file where all the data fun happens. When you run this file you will <br>
   a. Download the required data for the S&P 500 including variables required for themeatic subsetting (industry, beta, adj price, etc.) (2019-2023) <br>
   b. Do some manual data manipulation to make working this data easier <br>
   c. Appends ESG scores to the primary dataframe <br>
@@ -52,7 +52,7 @@ The creation process for this repo follows this process: <br>
   f. Generates a variance covariance matrix <br>
   g. Generates a subset of the primary dataframe with one observation per firm <br>
   h. Outputs the needed data to "covariance_matrix_returns", "data_scores", "expected_returns", "sp500_data_with_scores", and "sp500_tickers"
-1. **`app.py`**
+1. **`app.py`** - This is the python file that runs the streamlit dashboard you see. This file 
   
 
 
