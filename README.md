@@ -30,7 +30,7 @@ To visualize this, the project will create a dashboard that graphs the efficient
  - Given different risk aversion levels (different points on the capital allocation line), how much more or less efficient does the subset become (based on utils)? <br> <br>
 The utility of a portfolio is calculated using the following formula:
 
-\[ U = \text{Expected Return} - \frac{1}{2} \times A^2 \times \sigma^2 \]
+\[ U = \text{Expected Return} - \frac{1}{2} A^2 \sigma^2 \]
 
 Where:
 - \( U \) is the utility of the portfolio.
