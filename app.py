@@ -43,14 +43,14 @@ with st.sidebar:
     def theme_selector():
         option = st.selectbox(
         'Select your theme :)',
-        ('ESG Investing', 'L,E,H,I,G,H', 'I like my beta low', 'I am not high, beta is', 'Sector','Highest Price per Shares'))
+        ('ESG Investing', 'L,E,H,I,G,H', 'I like my beta low', 'I am not high, beta is', 'Sector','Cheapest Stocks'))
     
         options_info = {
             'ESG Investing': "ESG investing has been growing in recent years. It incorporates Environmental, Social, and Governance factors of the firms.",
             'L,E,H,I,G,H': "This theme includes companies whose tickers contain the letters L, E, H, I, or G.",
             'I like my beta low': "Low beta stocks tend to be less volatile and less risky than the overall market.",
             'I am not high, beta is': "High beta stocks",
-            'Highest Price per Shares': "This will give you firms that have the highest price per shares"
+            'Cheapest Stocks': "This will give you firms that have the Cheapest Stocks."
     }
     
         selected_sectors = []
@@ -72,12 +72,7 @@ with st.sidebar:
     
     '''
     ---
-    # YEAR probably will not use this, only if we have multi year var-covar; time permatting
-    '''
-    # start_year, end_year = st.select_slider(     'Select your timeline',     options=['2019', '2020', '2021', '2022', '2023', '2024'],     value=('2019', '2024'))     
-    # st.write('You selected years between', start_year, 'and', end_year)
-    '''
-    ---
+  
     ## RISK
     '''
     risk_levels = st.radio(
@@ -315,6 +310,9 @@ fig4.update_layout(yaxis_range = [0,0.5],
 fig5 = go.Figure(data=fig1.data + fig2.data + fig3.data + fig4.data, layout = fig4.layout)
 fig5.update_layout(height=600) 
 
+#record the maximum utility 
+max_utility_1 = round(max_util_port[0],4)
+
 # st.plotly_chart(fig5,use_container_width=True)
 
 def get_theme_assets(option, selected_sectors):
@@ -337,8 +335,8 @@ def get_theme_assets(option, selected_sectors):
         stocks = stocks[stocks['Beta'].notnull()]
         stocks = stocks.sort_values('Beta', ascending=False)
         subset_asset_list = stocks['Ticker'].tolist()[:50]
-    elif option == 'Highest Price per Shares':
-        stocks = stocks.sort_values('Price', ascending=False)
+    elif option == 'Cheapest Stocks':
+        stocks = stocks.sort_values('Price', ascending=True)
         subset_asset_list = stocks['Ticker'].tolist()[:50]
     elif option == 'Sector':
         stocks = stocks[stocks['Sector'].isin(selected_sectors)]
@@ -377,7 +375,7 @@ fig7 = px.line(y=ef_points[0], x=ef_points[1])
 fig7.update_traces(line_color='orange', line_width=3)
 
 # assets 
-fig8 = px.scatter(y=assets[0], x=assets[1], hover_name=assets[0].index)
+fig8 = px.scatter(y=assets[0], x=assets[1], hover_name=assets[0].index, color_discrete_sequence=['orange'])
 
 # tang + max_util 
 points = pd.DataFrame({
@@ -392,7 +390,7 @@ fig9 = px.scatter(points,x='x',y='y',
                   symbol='port',
                   hover_name='port',text="port",
                   color_discrete_sequence = ['red','blue'],
-                  symbol_sequence=['star','star'],
+                  symbol_sequence=['square','square'],
                   labels={'x':'Volatility', 'y':'Expected Returns'},
                   size=[2,2],
                   color='port')
@@ -419,13 +417,29 @@ fig9.update_layout(yaxis_range = [0,0.5],
 fig10 = go.Figure(data=fig1.data + fig2.data + fig3.data + fig4.data + fig6.data + fig7.data + fig8.data + fig9.data,  layout = fig4.layout)
 fig10.update_layout(height=600)
 st.plotly_chart(fig10,use_container_width=True)
+
+#print the maximum utility in each of the portfolios
+max_utility_2 = round(max_util_port[0],4)
+
+""""
+## Your Results
+"""
+if st.button("Click to see your results!"):
+    st.write(f"Max Utility of SP500: {max_utility_1}")
+    st.write(f"Max Utility of Subset: {max_utility_2}")
+    st.write(f"Loss of Utility: {round(max_utility_1-max_utility_2,4)}")
+
+
 '''
 - The chart is interactive: zoom, hover to see tickers
-- Expected returns and volatility are annualized measures
+- Expected returns and volatility are based on the S&P 500 firms
 - The calculation of expected returns uses CAPM, but will be inaccuracute on a forward looking basis
-- Blue line is the efficient frontier and the blue start is the optimal "all-equity" portfolio
-- Red line is the "capital market line" representing a portfolio that combines the risk free asset and the tangency portfolio
-- The red star is the optimal portfolio combining the risk free asset and the tangency portfolio, based on your risk aversion parameter and choice of maximum allowable leverage
-- If your leverage is more than 1 and your risk aversion low enough, the optimal portfolio might involve borrowing money to invest in equities; if so, the red star will be to the right of the blue star
+- Blue line is the efficient frontier of the S&P 500 firms and the blue star is the optimal "all-equity" portfolio
+- Red line is the "capital market line" of the S&P 500 representing a portfolio that combines the risk free asset and the tangency portfolio
+- The red star is the optimal portfolio combining the risk free asset and the tangency portfolio, based on your risk aversion parameter
+- Yellow line is the efficient frontier of the subet of firms based on your selected theme and the yellow square is the optimal "all-equity" portfolio
+- The green line is the "capital market line" of the subset of firms based on your selected theme and the green square is the optimal tangency portfolio, based on your risk aversion parameter
+- The chart shows the difference in utility between the two portfolios
+- This portfolio does not incorporate the option of incorporating leverage, and henceforth does not show optimal portfolios beyond the point of tangency with the efficient frontier
 '''
 
