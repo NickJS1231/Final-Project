@@ -63,26 +63,43 @@ The creation process for this repo follows this process: <br>
 
 These functions are essential for collecting data, selecting thematic themes or sectors, calculating efficient frontier points, and retrieving assets based on user input. They facilitate the functionality of the dashboard by handling data processing and visualization tasks.
 
-  
+### Running This Yourself
+As per the prior projects instruction, here is how you can use this repo yourself
+1. A working python / Anaconda installation
+1. Git 
 
+Then, open a terminal and run these commands one at a time:
 
+```sh
+# download files (you can do this via github desktop too)
+cd <path to your FIN377 folder> # make sure the cd isn't a repo or inside a repo!
+git clone https://github.com/donbowen/portfolio-frontier-streamlit-dashboard.git
 
+# move the terminal to the new folder (adjust next line if necessary)
+cd portfolio-frontier-streamlit-dashboard  
 
-- The final dataset used to perform an analysis will contain each firm and its expected return/variance over a given period of time. <br>
- - Dependent on adopting the time aspect of this model, the unit of observation will either be firm, or firm-time-period (i.e., 3yr CAGR foro 15 years of data). <br>
- - Sample period will depend on the adoption mentioned above, but at minimum will be a 1yr time from for which to compound returns over <br>
- - Sample restrictions will be made based on the listed portfolio themes, research into the categories will determine specific selections of firms. <br>
- - Data on returns, ticker, potential categorization values (i.e., ESG scores, beta etc.) are required and will likely need to be merged from multiple datasets.<br>
- - Raw data for all of the above is available, calculation of returns and variance will be required. This data will not be collected, rather computed off of raw data. <br>
- - Inputs will be return data and necessary thematic descriptors. Data will be stored as follows: <br><br>
-### File Structure <br>
- - Get data: data including: ticker, price, beta, gsector, and esg score will be downloaded in a get data file, that will produce a finalized CV alonside a variance ovariance matrix.
- - Dashboard: a pytyhon file will be used to generate a dashboard that then performs all analysis including plotting, utility scoring and comparison, etc.
+# this deletes the .git subfolder, so you can make this your own repo
+# MAKE SURE THE cd IS THE portfolio-frontier-streamlit-dashboard FOLDER FIRST!
+rm -r -fo .git 
 
+# set up the packages you need for this app to work 
+# (YOU CAN SKIP THESE if you have already streamlit-env, or you can 
+# give this one a slightly diff name by modifying the environment.yml file)
+conda env create -f streamlit_env.yml
+conda activate streamlit-env
 
+# start the app in a browser window
+streamlit run app.py
 
+# open any IDE you want to modify app - spyder > jupyterlab for this
+spyder  # and when you save the file, the app website will update
+```
 
-### Sample of Dashboard
+### To deploy the site on the web, 
+1. Use Github Desktop to make this a repo your own account. 
+1. Go to streamlit's website, sign up, and deploy it by giving it the URL to your repo.
+1. Wait a short time... and voila!
+
 
 
 
