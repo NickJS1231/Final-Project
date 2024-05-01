@@ -235,7 +235,7 @@ def get_plotting_structures(asset_list=None):
 ###############################################################################
 
 asset_list = pd.read_csv('inputs/sp500_tickers.csv',header=None,names=['asset'])
-asset_list = asset_list['asset'].to_list()[:100]
+asset_list = asset_list['asset'].to_list()
 
 ###############################################################################
 # get E(r) vol of Max Utility portfolio with leverage and RF asset 
@@ -315,7 +315,7 @@ fig4.update_layout(yaxis_range = [0,0.5],
 fig5 = go.Figure(data=fig1.data + fig2.data + fig3.data + fig4.data, layout = fig4.layout)
 fig5.update_layout(height=600) 
 
-st.plotly_chart(fig5,use_container_width=True)
+# st.plotly_chart(fig5,use_container_width=True)
 
 def get_theme_assets(option, selected_sectors):
     """
@@ -332,23 +332,93 @@ def get_theme_assets(option, selected_sectors):
     elif option == 'I like my beta low':
         stocks = stocks[stocks['Beta'].notnull()]  # Exclude rows with missing 'Beta' values
         stocks = stocks.sort_values('Beta', ascending=True)
-        subset_asset_list = stocks['Symbol'].tolist()[:50]
+        subset_asset_list = stocks['Ticker'].tolist()[:50]
     elif option == 'I am not high, beta is':
         stocks = stocks[stocks['Beta'].notnull()]
         stocks = stocks.sort_values('Beta', ascending=False)
-        subset_asset_list = stocks['Symbol'].tolist()[:50]
+        subset_asset_list = stocks['Ticker'].tolist()[:50]
     elif option == 'Highest Price per Shares':
         stocks = stocks.sort_values('Price', ascending=False)
-        subset_asset_list = stocks['Symbol'].tolist()[:50]
+        subset_asset_list = stocks['Ticker'].tolist()[:50]
     elif option == 'Sector':
         stocks = stocks[stocks['Sector'].isin(selected_sectors)]
-        subset_asset_list = stocks['Symbol'].tolist()
+        subset_asset_list = stocks['Ticker'].tolist()
     return subset_asset_list
 
 subset_asset_list = get_theme_assets(selected_sectors[0], selected_sectors[1])
 
+###############################################################################
+#Starting plotting the efficient fontier fo subset_asset_list
+###############################################################################
+rf_rate, assets, ef_points, tangency_port = get_plotting_structures(subset_asset_list)
 
+# solve for max util (rf asset + tang port, lev allowed)
 
+mu_cml      = np.array([rf_rate,tangency_port[0]])
+cov_cml     = np.array([[0,0],
+                        [0,tangency_port[1]]])
+ef_max_util = EfficientFrontier(mu_cml,cov_cml,(0,1)) # only allow leverage from 0 to 1, no shorting      
+    
+ef_max_util.max_quadratic_utility(risk_aversion=risk_aversion)
+
+# extract portfolio ret / vol (can't use built in for some reason...)
+
+tang_weight_util_max = ef_max_util.weights[1]
+x_util_max           = tang_weight_util_max*tangency_port[1]
+max_util_port        = [x_util_max*tangency_port[2]+rf_rate,
+                        x_util_max]
+
+x_high = assets[1].max()*.8
+fig6 = px.line(x=[0,x_high], y=[rf_rate,rf_rate+x_high*tangency_port[2]])
+fig6.update_traces(line_color='green', line_width=3)
+
+# ef
+fig7 = px.line(y=ef_points[0], x=ef_points[1])
+fig7.update_traces(line_color='orange', line_width=3)
+
+# assets 
+fig8 = px.scatter(y=assets[0], x=assets[1], hover_name=assets[0].index)
+
+# tang + max_util 
+points = pd.DataFrame({
+                    'port': ['Max utility<br>portfolio','Tangency<br>portfolio'],
+                    'y': [max_util_port[0],tangency_port[0]],
+                    'x': [max_util_port[1],tangency_port[1]],
+                    'sym' : ['star','star'],
+                    'size' : [2,2],
+                    'color':['green','orange']})
+
+fig9 = px.scatter(points,x='x',y='y',
+                  symbol='port',
+                  hover_name='port',text="port",
+                  color_discrete_sequence = ['red','blue'],
+                  symbol_sequence=['star','star'],
+                  labels={'x':'Volatility', 'y':'Expected Returns'},
+                  size=[2,2],
+                  color='port')
+
+# perfect formatting text annotation color matches marker
+fig9.update_traces(showlegend=False)
+def trace_specs(t):    
+    # Text annotation color matches marker'
+    # If statement flips the red marker underneith to avoid overlapping text'
+    if t.marker.color == 'red' and (abs(max_util_port[1]-tangency_port[1])<.02):
+        return t.update(textfont_color=t.marker.color, textposition='bottom center')
+    else:
+        return t.update(textfont_color=t.marker.color, textposition='top center')
+
+fig9.for_each_trace(lambda t: trace_specs(t))
+fig9.update_layout(yaxis_range = [0,0.5],
+                   xaxis_range = [0,0.5],
+                   font={'size':16},
+                   yaxis = dict(tickfont = dict(size=20),titlefont = dict(size=20)),
+                   xaxis = dict(tickfont = dict(size=20),titlefont = dict(size=20)),
+                   
+                   )
+
+fig10 = go.Figure(data=fig1.data + fig2.data + fig3.data + fig4.data + fig6.data + fig7.data + fig8.data + fig9.data,  layout = fig4.layout)
+fig10.update_layout(height=600)
+st.plotly_chart(fig10,use_container_width=True)
 '''
 - The chart is interactive: zoom, hover to see tickers
 - Expected returns and volatility are annualized measures
