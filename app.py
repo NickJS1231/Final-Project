@@ -23,6 +23,7 @@ st.set_page_config(
 
 """
 # Thematic Investing: How good is your strategy?
+Ever wondered how effective strategically investing in different themes is? This tool will help you compare the utility of your thematic investing strategy with the utility of the S&P 500. What you will see at work is the power of diversification and the benefits of investing in a broad market index. You will also see the impact of your risk aversion on the utility of your portfolio.
 """
 
 #############################################
@@ -91,7 +92,7 @@ with st.sidebar:
     elif risk_levels == ":rainbow[Severe Risk]":
         risk_aversion = 1.75
     elif risk_levels == ":rainbow[Extreme Risk]":
-        risk_aversion = .75
+        risk_aversion = .05
     else:
         risk_aversion = 10
 
@@ -102,7 +103,7 @@ with st.sidebar:
     
     ---
     
-    [Source code and contributors here.](https://github.com/donbowen/portfolio-frontier-streamlit-dashboard)
+    [This project is adaptation of a previous efficient frontier project.](https://github.com/donbowen/portfolio-frontier-streamlit-dashboard)
     '''
 
 #############################################
@@ -311,7 +312,9 @@ fig5 = go.Figure(data=fig1.data + fig2.data + fig3.data + fig4.data, layout = fi
 fig5.update_layout(height=600) 
 
 #record the maximum utility 
-max_utility_1 = round(max_util_port[0],4)
+max_utility_1 = round((max_util_port[0]-.5*risk_aversion*max_util_port[1]**2),4)
+
+
 
 # st.plotly_chart(fig5,use_container_width=True)
 
@@ -419,18 +422,22 @@ fig10.update_layout(height=600)
 st.plotly_chart(fig10,use_container_width=True)
 
 #print the maximum utility in each of the portfolios
-max_utility_2 = round(max_util_port[0],4)
+max_utility_2 = round((max_util_port[0]-0.5*risk_aversion*max_util_port[1]**2),4)
+
 
 """"
 ## Your Results
 """
 if st.button("Click to see your results!"):
+    st.write("Using the utility function U = Expected Return - 0.5Aσ², the utility of the portfolios are:")
     st.write(f"Max Utility of SP500: {max_utility_1}")
     st.write(f"Max Utility of Subset: {max_utility_2}")
     st.write(f"Loss of Utility: {round(max_utility_1-max_utility_2,4)}")
+    st.write("Where A is the risk aversion parameter and σ is the standard deviation of the portfolio.")
 
 
 '''
+## Notes
 - The chart is interactive: zoom, hover to see tickers
 - Expected returns and volatility are based on the S&P 500 firms
 - The calculation of expected returns uses CAPM, but will be inaccuracute on a forward looking basis
