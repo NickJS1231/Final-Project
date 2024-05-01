@@ -12,17 +12,17 @@ To visualize this, the project will create a dashboard that graphs the efficient
  - Ticker contains letters in LEHIGH
  - Cheapest Securities (price per share)
  - Sector (can be one or a combination)<br>
-  - Industries
-  - Healthcare
-  - Technology
-  - Utilities
-  - Financial Services
-  - Basic Materials
-  - Consumer Cyclical
-  - Real Estate
-  - Communication Services
-  - Consumer Defensive
-  - Energy
+   - Industries
+   - Healthcare
+   - Technology
+   - Utilities
+   - Financial Services
+   - Basic Materials
+   - Consumer Cyclical
+   - Real Estate
+   - Communication Services
+   - Consumer Defensive
+   - Energy
  <br> <br>
 
 **The Analysis will then assess the following:** <br>
